@@ -245,18 +245,15 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      // row 0, column ^
+      // SUBRACT ROW - COLUMN
 
-      /*
-    [
-      [0, 1, 0, 0],
-      [0, 0, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ]
-      */
+      // (0, 1),   (0, var)
+      // (1, 2),   (1, var + 1)
+      // (2, 3),   (2, var + 2)
+      // (3, 4),   (3, var + 3)
 
-
+      // (0,1)
       // if array of arrays [i][i] has a value
       // array array of [i + 1][i + 1] has a value
       // array array of [i + 2][i + 2] has a value
@@ -264,19 +261,104 @@
       // return true
       // return false
 
+      var pieces = [];
+      var theBoard = this.rows();
+      // console.log('theBoard', theBoard);
+
+      // feed this function a starting point
+      // (0, var)
+
+      for (var i = 0; i < theBoard.length; i++) {
+        if (theBoard[i][majorDiagonalColumnIndexAtFirstRow + i] === 1) {
+          pieces.push({row: i, column: majorDiagonalColumnIndexAtFirstRow + i});
+        }
+      }
+
+      if (pieces.length > 1) {
+        var difference1 = pieces[0].row - pieces[0].column;
+        var difference2 = pieces[1].row - pieces[1].column;
+        return difference1 === difference2;
+      }
+      return false;
+
+      // [
+      //   [0, 1, 0, 0],
+      //   [0, 0, 0, 0],
+      //   [0, 0, 0, 1],
+      //   [0, 0, 0, 0]
+      // ]
+
+      // if (theBoard[0][majorDiagonalColumnIndexAtFirstRow] === 1) {
+      // }
+      // if (theBoard[][])
+
+      // Iterate through first rows until we find the piece
+      // iterate through the row
+      // var row = theBoard[i];
+      //   for (var j = 0; j < row.length; j++) {
+      //     if (row[j] === 1) {
+      //       pieces.push({ row: i, column: j});
+      //     }
+      //   }
+      // }
+
+      // pieces = [{row: 0, column: 1}, {row: 2, column: 3}]
+      // Save column number and row number
+      // Get sum and difference
+      // Iterate until we find another piece
+      // Get sum and difference
+      // Compare them
+      // if sum or difference is equal return true
+      // otherwise return false
+
       // if array of arrays[i]
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+
+      // var startingpoints = [[2, 0], [1, 0], [0, 0], [0, 1], [0, 2]]
+      // helper function lets us enter the column number (the second number in the arrays above)
+
+      // 3 different rows
+      // helperfunc(0)
+      // helperfunc(1)
+      // helperfunc(2)
+
+      // theBoard[0] - the first row
+      // theboard[1] the second row
+
+      // iterate through board0 - i goes from 0 to 2
+      // call helper function of each thing - 0,0    0,1      0,2
+      // theboard[1]
+
+      var result = [];
+      var negativeColumn = -this.get(0).length;
+      var positiveColumn = -negativeColumn;
+      // console.log('neg column', negativeColumn);
+
+      for (var i = negativeColumn; i < positiveColumn; i++) {
+        result.push(this.hasMajorDiagonalConflictAt(i));
+      }
+      console.log('result', result);
+
+      for (var i = 0; i < result.length; i++) {
+        if (result[i] === true) {
+          return true;
+        }
+      }
+      return false;
+
+
+
+
 
       /*
     [
-      [0, 0, 0, 0],
-      [1, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 1, 0]
+            x  x  x  x [x0, x0, x0,  0],
+               x  x  x [x1,  0,  0,  0],
+                x  x [x0,  0,  0,  0],
+                   x [ 0,  0,  1,  0]
     ]
       */
 
@@ -307,6 +389,7 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      // ADD ROW + COLUMN
       return false; // fixme
       /*
     [
